@@ -4,27 +4,33 @@
 /* ── Design Tokens ─────────────────────────────────────────────────────────── */
 :root {
   --bg-primary:    #FAFAF8;
-  --bg-surface:    #F5F3EF;
+  --bg-surface:    #F7F5F2;
   --bg-dark:       #1C1C1A;
   --bg-card:       #FFFFFF;
 
-  --text-primary:  #1C1C1A;
-  --text-secondary:#6B6860;
-  --text-muted:    #9B9890;
+  --text-primary:  #2A2A28;
+  --text-secondary:#6B7280;
+  --text-muted:    #9CA3AF;
   --text-inverse:  #FAFAF8;
 
-  --accent:        #8B6F47;
-  --accent-light:  #C4A882;
-  --accent-hover:  #7A5F39;
-  --accent-pale:   #F0E8DD;
+  /* Brand Orange — from the AV logo mark */
+  --accent:        #F07840;
+  --accent-light:  #F9A07A;
+  --accent-hover:  #D9663A;
+  --accent-pale:   #FEF0E9;
+  --accent-dark:   #B85530;
+
+  /* Brand Gray — from the wordmark */
+  --brand-gray:    #6B7280;
+  --brand-gray-dk: #4B5563;
 
   --border:        #E8E5E0;
-  --border-dark:   #D4D0CB;
+  --border-dark:   #D1CDC7;
 
   --shadow-sm:     0 1px 3px rgba(28,28,26,0.06), 0 1px 2px rgba(28,28,26,0.04);
   --shadow-md:     0 4px 16px rgba(28,28,26,0.08), 0 2px 4px rgba(28,28,26,0.04);
   --shadow-lg:     0 16px 48px rgba(28,28,26,0.12), 0 4px 12px rgba(28,28,26,0.06);
-  --shadow-xl:     0 32px 80px rgba(28,28,26,0.16);
+  --shadow-xl:     0 32px 80px rgba(240,120,64,0.12);
 
   --radius-sm:     6px;
   --radius-md:     12px;
@@ -130,7 +136,7 @@ body {
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(139,111,71,0.35);
+  box-shadow: 0 8px 24px rgba(240,120,64,0.4);
 }
 .btn-secondary {
   display: inline-flex;
@@ -211,32 +217,76 @@ body {
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-surface); }
 ::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-light); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ── Selection ─────────────────────────────────────────────────────────────── */
 ::selection { background: var(--accent-pale); color: var(--text-primary); }
 
-/* ── Animations ────────────────────────────────────────────────────────────── */
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  50%       { transform: translateY(-10px); }
 }
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.6; }
+}
+@keyframes gradient-sweep {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes shimmer-line {
+  0%   { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(300%)  skewX(-20deg); }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-.animate-float { animation: float 6s ease-in-out infinite; }
-.animate-marquee { animation: marquee 30s linear infinite; }
+/* ── Animation Utilities ───────────────────────────────────────────────────── */
+.animate-float     { animation: float 6s ease-in-out infinite; }
+.animate-marquee   { animation: marquee 32s linear infinite; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-page-enter { animation: page-enter 0.6s ease forwards; }
 
-/* ── Image Overlay ─────────────────────────────────────────────────────────── */
+/* Shimmer effect for cards / skeletons */
+.shimmer-card {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: shimmer-line 2.5s infinite;
+  pointer-events: none;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Image Utilities ───────────────────────────────────────────────────────── */
 .image-overlay {
   position: relative;
   overflow: hidden;
@@ -257,6 +307,6 @@ body {
 
 /* ── Navbar ────────────────────────────────────────────────────────────────── */
 .navbar-blur {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }

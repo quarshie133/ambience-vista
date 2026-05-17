@@ -65,10 +65,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <p className="font-display text-2xl font-medium">Ambience Vista</p>
-              <p className="text-xs tracking-[0.2em] uppercase mt-1" style={{ color: 'var(--accent-light)' }}>
-                Paint Specialists · Ghana
-              </p>
+              <img
+                src="/Ambience-Vista-Logo-Colour.png"
+                alt="Ambience Vista"
+                style={{ height: '38px', width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.92 }}
+              />
             </div>
             <p className="text-sm leading-relaxed max-w-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
               We don't just paint — we guide clients on what to use, how much to use, and how to achieve better results through structure, supervision, and quality control.

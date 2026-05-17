@@ -93,22 +93,22 @@ export default function About() {
             </motion.p>
 
             {/* Values Grid */}
-            <motion.div className="grid grid-cols-2 gap-4" variants={staggerContainer}>
+            <motion.div className="grid grid-cols-2 gap-3 mt-8" variants={staggerContainer}>
               {[
-                { label: 'Structured Process',   desc: 'Every project follows a defined methodology from assessment to handover.' },
-                { label: 'Technical Expertise',  desc: 'Our team is trained in surface analysis, product selection, and application techniques.' },
-                { label: 'Client Education',     desc: 'We ensure clients understand every decision and why it was made.' },
-                { label: 'Quality Assurance',    desc: 'Multi-stage inspections ensure every surface meets our exacting standards.' },
+                { label: 'Structured Process',  desc: 'Defined methodology from assessment to handover.' },
+                { label: 'Technical Expertise', desc: 'Trained in surface analysis, product selection, and application.' },
+                { label: 'Client Education',    desc: 'Clients understand every decision and why it was made.' },
+                { label: 'Quality Assurance',   desc: 'Multi-stage inspections at every phase of the project.' },
               ].map((v) => (
                 <motion.div
                   key={v.label}
-                  className="p-5 rounded-lg"
+                  className="p-4 rounded-xl relative overflow-hidden"
                   style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}
                   variants={fadeInUp}
-                  whileHover={{ borderColor: 'var(--accent-light)', transition: { duration: 0.2 } }}
+                  whileHover={{ borderColor: 'var(--accent)', transition: { duration: 0.2 } }}
                 >
-                  <div className="w-6 h-px mb-3" style={{ background: 'var(--accent)' }} />
-                  <p className="font-medium text-sm mb-2" style={{ color: 'var(--text-primary)' }}>{v.label}</p>
+                  <div className="w-5 h-0.5 mb-2.5 rounded-full" style={{ background: 'var(--accent)' }} />
+                  <p className="font-semibold text-sm mb-1.5 leading-snug" style={{ color: 'var(--text-primary)' }}>{v.label}</p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{v.desc}</p>
                 </motion.div>
               ))}

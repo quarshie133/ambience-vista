@@ -48,13 +48,17 @@ export default function Navbar() {
         <div className="container-site">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link to="/" className="flex flex-col leading-tight">
-              <span className="font-display text-xl font-medium tracking-tight" style={{ color: scrolled ? 'var(--text-primary)' : '#fff' }}>
-                Ambience Vista
-              </span>
-              <span className="text-xs tracking-[0.2em] uppercase" style={{ color: scrolled ? 'var(--accent)' : 'rgba(255,255,255,0.7)' }}>
-                Paint Specialists
-              </span>
+            <Link to="/" className="flex items-center">
+              <img
+                src="/Ambience-Vista-Logo-Colour.png"
+                alt="Ambience Vista"
+                style={{
+                  height: '40px',
+                  width: 'auto',
+                  filter: scrolled ? 'none' : 'brightness(0) invert(1)',
+                  transition: 'filter 0.5s ease',
+                }}
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -116,7 +120,7 @@ export default function Navbar() {
               transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: 'var(--border)' }}>
-                <span className="font-display text-xl" style={{ color: 'var(--text-primary)' }}>Menu</span>
+                <img src="/Ambience-Vista-Logo-Colour.png" alt="Ambience Vista" style={{ height: '32px', width: 'auto' }} />
                 <button onClick={() => setMenuOpen(false)} style={{ color: 'var(--text-secondary)' }}>
                   <X size={20} />
                 </button>

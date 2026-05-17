@@ -41,24 +41,24 @@ export default function Hero() {
           style={{
             background: `linear-gradient(
               135deg,
-              rgba(28,24,20,0.85) 0%,
-              rgba(28,24,20,0.65) 40%,
-              rgba(139,111,71,0.3) 70%,
-              rgba(28,24,20,0.75) 100%
+              rgba(28,24,20,0.88) 0%,
+              rgba(28,24,20,0.62) 40%,
+              rgba(240,120,64,0.18) 70%,
+              rgba(28,24,20,0.78) 100%
             )`
           }}
         />
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(28,24,20,0.9) 100%)' }}
+          style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(28,24,20,0.92) 100%)' }}
         />
       </div>
 
       {/* Floating accent elements */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(196,168,130,0.12) 0%, transparent 70%)' }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(240,120,64,0.1) 0%, transparent 70%)' }}
+        animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Content */}
@@ -129,15 +129,20 @@ export default function Hero() {
               { value: '150+', label: 'Happy Clients'      },
               { value: '6+',   label: 'Years Experience'   },
               { value: '100%', label: 'Quality Guaranteed'  },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-4xl font-light" style={{ color: 'var(--accent-light)' }}>
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 + i * 0.1 }}
+              >
+                <p className="font-display text-4xl font-light" style={{ color: 'var(--accent)' }}>
                   {stat.value}
                 </p>
                 <p className="text-xs tracking-wide uppercase mt-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
                   {stat.label}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

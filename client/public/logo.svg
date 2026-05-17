@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" fill="none">
+  <!-- AV lettermark in brand orange -->
+  <!-- A shape -->
+  <path d="M10 62 L28 18 Q30 13 35 13 Q40 13 42 18 L48 35 L38 35 L35 26 L20 62 Z" fill="#F07840"/>
+  <!-- v bottom of A -->
+  <path d="M24 48 L46 48 L42 62 L28 62 Z" fill="#F07840"/>
+  <!-- teardrop dot -->
+  <circle cx="35" cy="10" r="5" fill="#F07840"/>
+  <!-- V shape -->
+  <path d="M50 18 L62 55 L74 18 L84 18 L68 62 Q66 67 62 67 Q58 67 56 62 L40 18 Z" fill="#F07840"/>
+
+  <!-- "ambience" text -->
+  <text x="95" y="38" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="400" fill="#6B7280" letter-spacing="0.5">ambience</text>
+  <!-- "vista" text -->
+  <text x="95" y="60" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="400" fill="#6B7280" letter-spacing="0.5">vista</text>
+</svg>
