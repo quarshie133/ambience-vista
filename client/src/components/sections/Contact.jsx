@@ -77,10 +77,10 @@ export default function Contact() {
           >
             <div className="space-y-6 mb-10">
               {[
-                { icon: Phone,   label: 'Phone',    value: '+233 000 000 000',       href: 'tel:+233000000000'          },
-                { icon: Mail,    label: 'Email',    value: 'info@ambiencevista.com',  href: 'mailto:info@ambiencevista.com' },
-                { icon: MapPin,  label: 'Location', value: 'Accra, Ghana',            href: '#'                          },
-                { icon: Clock,   label: 'Hours',    value: 'Mon–Sat: 7am – 6pm',     href: '#'                          },
+                { icon: Phone,   label: 'Phone',    value: '+233 55 000 0000',            href: 'tel:+233550000000'              },
+                { icon: Mail,    label: 'Email',    value: 'info@ambiencevista.com',      href: 'mailto:info@ambiencevista.com'  },
+                { icon: MapPin,  label: 'Location', value: 'Greater Accra, Ghana',        href: '#'                              },
+                { icon: Clock,   label: 'Hours',    value: 'Mon – Sat: 7am – 6pm',        href: '#'                              },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
                   <div

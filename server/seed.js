@@ -1,9 +1,10 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const AdminUser = require('./models/AdminUser');
-const Service = require('./models/Service');
-const Partner = require('./models/Partner');
-const SiteContent = require('./models/SiteContent');
+// seed.js — ES Module version (matches "type":"module" in package.json)
+import 'dotenv/config';
+import mongoose from 'mongoose';
+import AdminUser from './models/AdminUser.js';
+import Service from './models/Service.js';
+import Partner from './models/Partner.js';
+import SiteContent from './models/SiteContent.js';
 
 const services = [
   {
@@ -15,9 +16,9 @@ const services = [
   },
   {
     title: 'Residential Painting',
-    shortDescription: 'Premium interior and exterior painting for homes, with meticulous surface preparation and expert color guidance.',
+    shortDescription: 'Premium interior and exterior painting for homes, with meticulous surface preparation and expert colour guidance.',
     longDescription: 'Our residential painting service delivers exceptional quality finishes for homes of all sizes. From comprehensive surface preparation to final inspection, every detail is managed with precision and care.',
-    features: ['Interior painting', 'Exterior painting', 'Color consultation', 'Surface preparation', 'Quality inspection'],
+    features: ['Interior painting', 'Exterior painting', 'Colour consultation', 'Surface preparation', 'Quality inspection'],
     order: 2,
   },
   {
@@ -50,14 +51,15 @@ const services = [
   },
 ];
 
+// B — Real partners from spec
 const partners = [
-  { name: 'Coral Paints', order: 1 },
-  { name: 'Dulux', order: 2 },
-  { name: 'Archxenus', order: 3 },
-  { name: 'Habikon', order: 4 },
-  { name: 'Sugru', order: 5 },
-  { name: 'Edd McCray', order: 6 },
-  { name: 'MELYTAS', order: 7 },
+  { name: 'Coral Paints',  website: 'https://www.coral.com',    order: 1 },
+  { name: 'Dulux',         website: 'https://www.dulux.com',    order: 2 },
+  { name: 'Archxenus',     website: '#',                        order: 3 },
+  { name: 'Habikon',       website: '#',                        order: 4 },
+  { name: 'Sugru',         website: 'https://www.sugru.com',    order: 5 },
+  { name: 'Edd McCray',    website: '#',                        order: 6 },
+  { name: 'MELYTAS',       website: '#',                        order: 7 },
 ];
 
 const siteContent = [
@@ -65,7 +67,7 @@ const siteContent = [
     section: 'hero',
     data: {
       headline: 'We Help Clients Achieve Better Painting Outcomes Through Structure, Supervision, and Quality Control',
-      subheadline: 'We don\'t just paint — we guide clients on what to use, how much to use, and how to achieve better results.',
+      subheadline: "We don't just paint — we guide clients on what to use, how much to use, and how to achieve better results.",
       ctaPrimary: 'Request a Site Assessment',
       ctaSecondary: 'View Our Services',
     }
@@ -82,46 +84,33 @@ const siteContent = [
       experience: '6+',
     }
   },
-  {
-    section: 'whyUs',
-    data: {
-      headline: 'Why Clients Choose Us',
-      points: [
-        { number: '01', title: 'Structured Process', description: 'Every project follows a rigorous process from site assessment through final inspection. No shortcuts. No compromises.' },
-        { number: '02', title: 'Expert Supervision', description: 'Our experienced supervisors oversee every phase of your project, ensuring consistent quality from start to finish.' },
-        { number: '03', title: 'Quality Control', description: 'We implement multi-stage quality checks and use only premium, specification-appropriate products for every surface.' },
-        { number: '04', title: 'Client Education', description: 'We help clients understand what products to use, why, and how — building long-term relationships based on trust and knowledge.' },
-        { number: '05', title: 'Transparent Pricing', description: 'Clear, detailed quotations with no hidden costs. You know exactly what you\'re getting and what you\'re paying for.' },
-        { number: '06', title: 'Trained Professionals', description: 'Our team undergoes continuous training, staying current with industry best practices, products, and techniques.' },
-      ]
-    }
-  }
 ];
 
 async function seed() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Connected to MongoDB');
+    console.log('✅ Connected to MongoDB Atlas');
 
     // Clear existing data
     await Service.deleteMany({});
     await Partner.deleteMany({});
     await SiteContent.deleteMany({});
     await AdminUser.deleteMany({});
+    console.log('🗑️  Cleared existing data');
 
     // Seed services
     await Service.insertMany(services);
-    console.log('✓ Services seeded');
+    console.log('✅ 6 Services seeded');
 
-    // Seed partners
+    // Seed partners (all 7 from spec)
     await Partner.insertMany(partners);
-    console.log('✓ Partners seeded');
+    console.log('✅ 7 Partners seeded: Coral Paints, Dulux, Archxenus, Habikon, Sugru, Edd McCray, MELYTAS');
 
     // Seed site content
     for (const content of siteContent) {
       await SiteContent.create(content);
     }
-    console.log('✓ Site content seeded');
+    console.log('✅ Site content seeded');
 
     // Create admin user
     const admin = new AdminUser({
@@ -131,13 +120,16 @@ async function seed() {
       role: 'superadmin'
     });
     await admin.save();
-    console.log('✓ Admin user created');
+    console.log(`✅ Admin user created: ${process.env.ADMIN_EMAIL || 'admin@ambiencevista.com'}`);
 
-    console.log('\n✅ Database seeded successfully!');
-    console.log(`Admin login: ${process.env.ADMIN_EMAIL || 'admin@ambiencevista.com'}`);
+    console.log('\n🎉 Atlas database seeded successfully!');
+    console.log(`\n📊 Admin login:`);
+    console.log(`   Email:    ${process.env.ADMIN_EMAIL || 'admin@ambiencevista.com'}`);
+    console.log(`   Password: ${process.env.ADMIN_PASSWORD || 'AdminVista2024!'}`);
+    console.log(`   URL:      http://localhost:5000/admin\n`);
     process.exit(0);
   } catch (error) {
-    console.error('Seed error:', error);
+    console.error('❌ Seed error:', error.message);
     process.exit(1);
   }
 }

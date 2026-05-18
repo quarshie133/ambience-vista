@@ -54,17 +54,17 @@ export default function About() {
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
+              {/* Floating accent badge — inside image so it never overflows the column */}
+              <motion.div
+                className="absolute bottom-5 right-5 py-4 px-5 rounded-xl shadow-xl"
+                style={{ background: 'var(--accent)', color: '#fff', backdropFilter: 'blur(4px)' }}
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <p className="font-display text-3xl font-light leading-none">6+</p>
+                <p className="text-xs tracking-widest uppercase mt-1 opacity-85">Years of Excellence</p>
+              </motion.div>
             </div>
-            {/* Floating accent card */}
-            <motion.div
-              className="absolute -bottom-8 -right-8 p-6 rounded-lg shadow-xl hidden lg:block"
-              style={{ background: 'var(--accent)', color: '#fff', minWidth: '160px' }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <p className="font-display text-4xl font-light">6+</p>
-              <p className="text-xs tracking-wide uppercase mt-1 opacity-80">Years of Excellence</p>
-            </motion.div>
           </motion.div>
 
           {/* Text */}
@@ -102,12 +102,12 @@ export default function About() {
               ].map((v) => (
                 <motion.div
                   key={v.label}
-                  className="p-4 rounded-xl relative overflow-hidden"
+                  className="p-4 rounded-xl"
                   style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}
                   variants={fadeInUp}
                   whileHover={{ borderColor: 'var(--accent)', transition: { duration: 0.2 } }}
                 >
-                  <div className="w-5 h-0.5 mb-2.5 rounded-full" style={{ background: 'var(--accent)' }} />
+                  <div className="w-5 h-0.5 mb-3 rounded-full" style={{ background: 'var(--accent)' }} />
                   <p className="font-semibold text-sm mb-1.5 leading-snug" style={{ color: 'var(--text-primary)' }}>{v.label}</p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{v.desc}</p>
                 </motion.div>

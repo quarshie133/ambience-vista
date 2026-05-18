@@ -99,11 +99,13 @@ async function startServer() {
 
     // ─── AdminJS Setup ─────────────────────────────────────────────────────
     try {
-      const { default: AdminJS } = await import('adminjs');
+      const { default: AdminJS }      = await import('adminjs');
       const { default: AdminJSExpress } = await import('@adminjs/express');
-      const { default: AdminJSMongoose } = await import('@adminjs/mongoose');
+      // @adminjs/mongoose exports Resource & Database as named exports (not on default)
+      const MongooseAdapter = await import('@adminjs/mongoose');
+      const { Resource, Database } = MongooseAdapter;
 
-      AdminJS.registerAdapter({ Resource: AdminJSMongoose.Resource, Database: AdminJSMongoose.Database });
+      AdminJS.registerAdapter({ Resource, Database });
 
       const admin = new AdminJS({
         resources: [
@@ -165,10 +167,10 @@ async function startServer() {
           favicon: '/favicon.ico',
           theme: {
             colors: {
-              primary100: '#8B6F47',
-              primary80: '#A08455',
-              primary60: '#C4A882',
-              love: '#8B6F47',
+              primary100: '#F07840',
+              primary80:  '#F9A07A',
+              primary60:  '#FBB99B',
+              love:       '#F07840',
             }
           }
         },

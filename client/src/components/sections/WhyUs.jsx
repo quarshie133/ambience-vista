@@ -75,12 +75,8 @@ export default function WhyUs() {
 
         {/* Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          style={{
-            border: '1px solid rgba(255,255,255,0.07)',
-            borderRadius: 'var(--radius-md)',
-            overflow: 'hidden',
-          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}
           variants={fastStagger}
           initial="hidden"
           whileInView="visible"
@@ -90,53 +86,45 @@ export default function WhyUs() {
             <motion.div
               key={r.number}
               className="group relative flex flex-col p-8 cursor-default"
-              style={{
-                background: 'transparent',
-                borderRight: i % 3 !== 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                minHeight: '220px',
-              }}
+              style={{ background: 'var(--bg-dark)', minHeight: '220px' }}
               variants={blurUp}
-              whileHover={{
-                background: 'rgba(240,120,64,0.05)',
-                transition: { duration: 0.3 },
-              }}
+              whileHover={{ background: 'rgba(240,120,64,0.06)', transition: { duration: 0.3 } }}
             >
-              {/* Animated accent corner on hover */}
+              {/* Top border sweep on hover */}
               <motion.div
-                className="absolute top-0 left-0 h-px"
+                className="absolute top-0 left-0 h-0.5"
                 style={{ background: 'var(--accent)', width: 0 }}
                 whileHover={{ width: '100%' }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               />
 
-              {/* Number */}
+              {/* Large ghost number */}
               <span
-                className="font-display text-6xl font-light leading-none mb-6 block"
-                style={{ color: 'rgba(255,255,255,0.06)' }}
+                className="font-display text-7xl font-light leading-none mb-6 select-none block"
+                style={{ color: 'rgba(255,255,255,0.05)' }}
               >
                 {r.number}
               </span>
 
+              {/* Accent line */}
+              <motion.div
+                className="h-0.5 w-8 mb-4 flex-shrink-0 rounded-full"
+                style={{ background: 'var(--accent)', originX: 0 }}
+                variants={drawLine}
+              />
+
               {/* Title */}
               <h3
-                className="font-medium text-base mb-3 leading-snug transition-colors duration-300"
+                className="font-semibold text-base leading-snug mb-3"
                 style={{ color: '#fff' }}
               >
                 {r.title}
               </h3>
 
-              {/* Divider */}
-              <motion.div
-                className="h-px w-8 mb-4 flex-shrink-0"
-                style={{ background: 'var(--accent)', originX: 0 }}
-                variants={drawLine}
-              />
-
               {/* Description */}
               <p
-                className="text-sm leading-relaxed mt-auto"
-                style={{ color: 'rgba(255,255,255,0.48)' }}
+                className="text-sm leading-relaxed"
+                style={{ color: 'rgba(255,255,255,0.5)', lineHeight: '1.7' }}
               >
                 {r.description}
               </p>

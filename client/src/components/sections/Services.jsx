@@ -66,14 +66,21 @@ function ServiceCard({ service, index }) {
 
   return (
     <motion.div
-      className="group flex flex-col overflow-hidden rounded-2xl border"
-      style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      className="group flex flex-col rounded-2xl border"
+      style={{
+        background: 'var(--bg-card)',
+        borderColor: 'var(--border)',
+        /* No overflow:hidden on the card wrapper — prevents "Learn More" clipping */
+      }}
       variants={blurUp}
       transition={{ delay: index * 0.07 }}
-      whileHover={{ y: -6, boxShadow: '0 24px 60px rgba(240,120,64,0.12)', transition: { duration: 0.35 } }}
+      whileHover={{ y: -5, boxShadow: '0 20px 56px rgba(240,120,64,0.13)', borderColor: 'var(--accent-light)', transition: { duration: 0.3 } }}
     >
-      {/* Image */}
-      <div className="relative overflow-hidden flex-shrink-0" style={{ height: '200px' }}>
+      {/* Image — overflow hidden scoped only to the image container */}
+      <div
+        className="relative flex-shrink-0 rounded-t-2xl overflow-hidden"
+        style={{ height: '196px' }}
+      >
         <img
           src={service.image}
           alt={service.title}
@@ -82,46 +89,57 @@ function ServiceCard({ service, index }) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(28,28,26,0.65) 100%)' }}
+          style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(28,28,26,0.55) 100%)' }}
         />
         {/* Icon badge */}
         <div
-          className="absolute bottom-4 left-4 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+          className="absolute bottom-4 left-4 w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
           style={{ background: 'var(--accent)' }}
         >
-          <Icon size={17} color="#fff" strokeWidth={1.8} />
+          <Icon size={16} color="#fff" strokeWidth={2} />
         </div>
       </div>
 
-      {/* Body */}
+      {/* Card body — no overflow hidden here, flex-col, padding all sides */}
       <div className="flex flex-col flex-1 p-6">
+
+        {/* Title */}
         <h3
-          className="font-semibold text-base leading-snug mb-2"
+          className="font-semibold text-base leading-snug mb-3"
           style={{ color: 'var(--text-primary)' }}
         >
           {service.title}
         </h3>
+
+        {/* Short description */}
         <p
-          className="text-sm leading-relaxed flex-1"
-          style={{ color: 'var(--text-secondary)', lineHeight: '1.65' }}
+          className="text-sm leading-relaxed flex-1 mb-5"
+          style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}
         >
           {service.short}
         </p>
 
-        {/* Expand toggle */}
+        {/* Divider */}
+        <div className="h-px w-full mb-5" style={{ background: 'var(--border)' }} />
+
+        {/* Expand toggle — always visible, never clipped */}
         <button
           onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase mt-5 transition-colors"
+          className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase transition-colors w-fit"
           style={{ color: 'var(--accent)' }}
           id={`service-toggle-${service.id}`}
         >
           {expanded ? 'Show Less' : 'Learn More'}
-          <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+          <motion.span
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.28 }}
+            style={{ display: 'flex' }}
+          >
             <ChevronDown size={13} strokeWidth={2.5} />
           </motion.span>
         </button>
 
-        {/* Expanded content */}
+        {/* Expanded panel */}
         <AnimatePresence initial={false}>
           {expanded && (
             <motion.div
@@ -129,17 +147,27 @@ function ServiceCard({ service, index }) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
               style={{ overflow: 'hidden' }}
             >
               <div className="pt-5 mt-5" style={{ borderTop: '1px solid var(--border)' }}>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-secondary)', lineHeight: '1.65' }}>
+                <p
+                  className="text-sm leading-relaxed mb-5"
+                  style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}
+                >
                   {service.long}
                 </p>
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-2.5 mb-6">
                   {service.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm" style={{ color: 'var(--text-primary)' }}>
-                      <CheckCircle2 size={14} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                    <li
+                      key={f}
+                      className="flex items-start gap-2.5 text-sm"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      <CheckCircle2
+                        size={14}
+                        style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '3px' }}
+                      />
                       <span>{f}</span>
                     </li>
                   ))}
@@ -184,14 +212,19 @@ export default function Services() {
           >
             Our Services
           </motion.h2>
-          <motion.p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }} variants={fadeInUp}>
-            From residential homes to large-scale commercial developments, we deliver structured, supervised painting solutions tailored to every project.
+          <motion.p
+            className="text-base leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
+            variants={fadeInUp}
+          >
+            From residential homes to large-scale commercial developments, we deliver structured,
+            supervised painting solutions tailored to every project.
           </motion.p>
         </motion.div>
 
         {/* Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
           variants={fastStagger}
           initial="hidden"
           whileInView="visible"

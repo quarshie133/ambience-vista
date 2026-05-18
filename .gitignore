@@ -58,3 +58,8 @@ Thumbs.db
 # ===========================
 *.tsbuildinfo
 .eslintcache
+
+# ===========================
+# AdminJS auto-generated bundle (do NOT commit)
+# ===========================
+server/.adminjs/

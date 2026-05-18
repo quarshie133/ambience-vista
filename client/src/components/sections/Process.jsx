@@ -75,23 +75,29 @@ function StepItem({ step, index, total }) {
 
       {/* Right: Content */}
       <motion.div
-        className="pb-12 flex-1"
-        initial={{ opacity: 0, x: 30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-        transition={{ duration: 0.6, delay: index * 0.1 + 0.1 }}
+        className="pb-10 flex-1 min-w-0"
+        initial={{ opacity: 0, x: 28 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 28 }}
+        transition={{ duration: 0.55, delay: index * 0.1 + 0.1 }}
       >
-        <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
-          <h3 className="font-medium text-xl" style={{ color: 'var(--text-primary)' }}>
-            {step.title}
-          </h3>
-          <span
-            className="text-xs tracking-wide uppercase px-3 py-1 rounded-full flex-shrink-0"
-            style={{ background: 'var(--accent-pale)', color: 'var(--accent)' }}
-          >
-            {step.duration}
-          </span>
-        </div>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+        {/* Title row */}
+        <h3
+          className="font-semibold text-lg leading-snug mb-2"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          {step.title}
+        </h3>
+
+        {/* Duration badge — on its own line, no wrapping conflict */}
+        <span
+          className="inline-block text-xs tracking-wide uppercase px-3 py-1 rounded-full mb-3"
+          style={{ background: 'var(--accent-pale)', color: 'var(--accent)', fontWeight: 600 }}
+        >
+          {step.duration}
+        </span>
+
+        {/* Description */}
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
           {step.description}
         </p>
       </motion.div>
