@@ -1,168 +1,109 @@
 import { motion } from 'framer-motion';
-import { fadeInUp, staggerContainer, defaultViewport, scaleIn } from '../../lib/animations';
-import { Users, GraduationCap, Award, Handshake } from 'lucide-react';
+import { staggerContainer, defaultViewport } from '../../lib/animations';
 
-const sdgs = [
-  { number: '4', title: 'Quality Education', desc: 'Supporting skills development through structured internship programs and industry training.' },
-  { number: '5', title: 'Gender Equality', desc: 'Championing women in the painting industry through our Women in Colour Initiative.' },
-  { number: '8', title: 'Decent Work', desc: 'Creating dignified employment and economic opportunities for Ghanaian youth.' },
+const impacts = [
+  { stat: 'SDG 4',  label: 'Quality Education',     desc: 'Providing structured technical training and internship programmes for youth entering the painting trade — building industry-ready professionals.' },
+  { stat: 'SDG 5',  label: 'Gender Equality',        desc: 'Our Women in Colour Initiative creates dedicated pathways for women to build careers in the painting industry and achieve financial independence.' },
+  { stat: 'SDG 8',  label: 'Decent Work & Growth',   desc: 'Creating formal employment, fair wages, and professional development opportunities in a sector that has historically operated informally.' },
 ];
 
-const impactStats = [
-  { icon: Users,          value: '50+',  label: 'Interns Trained',        desc: 'Young professionals trained annually' },
-  { icon: GraduationCap, value: '12+',  label: 'Training Seminars',      desc: 'Industry knowledge-sharing events' },
-  { icon: Award,          value: '100%', label: 'Women Initiative',       desc: 'Active gender inclusion program'  },
-  { icon: Handshake,      value: '7+',   label: 'Industry Partners',      desc: 'Strategic brand collaborations'   },
+const initiatives = [
+  { number: '50+',  label: 'Interns Trained',             desc: 'Young professionals placed and mentored through structured internship programmes.' },
+  { number: '12+',  label: 'Women in Colour Members',     desc: 'Women trained, certified, and employed through our gender inclusion initiative.' },
+  { number: '20+',  label: 'Industry Seminars',           desc: 'Training events delivered in partnership with IDDG and industry stakeholders.' },
+  { number: '3+',   label: 'SDGs Directly Addressed',     desc: 'Measurable contributions to the UN Sustainable Development Goals.' },
 ];
 
 export default function Impact() {
   return (
-    <section id="impact" className="section-padding" style={{ background: 'var(--bg-surface)' }}>
+    <section id="impact" className="section-padding" style={{ background: 'var(--bg-dark)' }}>
       <div className="container-site">
+
         {/* Header */}
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
         >
-          <motion.div className="section-label justify-center" variants={fadeInUp}>
-            <span className="text-label">Beyond Paint</span>
-          </motion.div>
-          <motion.h2
-            className="text-display-lg font-display mb-5"
-            style={{ color: 'var(--text-primary)' }}
-            variants={fadeInUp}
+          <motion.div
+            className="lg:col-span-6"
+            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
           >
-            Impact & Industry Contribution
-          </motion.h2>
-          <motion.p className="text-base" style={{ color: 'var(--text-secondary)' }} variants={fadeInUp}>
-            We believe business success and social responsibility are not mutually exclusive. Ambience Vista actively contributes to Ghana's development through training, inclusion, and industry collaboration.
-          </motion.p>
+            <div className="overline-row mb-6">
+              <span className="overline" style={{ color: 'rgba(255,255,255,0.4)' }}>Industry Contribution</span>
+            </div>
+            <h2 className="text-editorial-xl" style={{ color: '#fff' }}>
+              Beyond Paint
+            </h2>
+          </motion.div>
+          <motion.div
+            className="lg:col-span-5 lg:col-start-8 flex items-end"
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.7, delay: 0.2 } } }}
+          >
+            <p className="body-editorial" style={{ color: 'rgba(255,255,255,0.55)' }}>
+              Ambience Vista is committed to building a stronger, more inclusive, and more professional painting industry in Ghana.
+            </p>
+          </motion.div>
         </motion.div>
 
-        {/* SDG Cards */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-        >
-          {sdgs.map((sdg) => (
+        {/* SDG Cards — dark panels, Studio McGee column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px mb-20" style={{ background: 'rgba(255,255,255,0.07)' }}>
+          {impacts.map((item, i) => (
             <motion.div
-              key={sdg.number}
-              className="relative p-8 rounded-2xl overflow-hidden group"
-              style={{ background: 'var(--accent)', color: '#fff' }}
-              variants={scaleIn}
-              whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+              key={item.stat}
+              className="p-10 lg:p-12"
+              style={{ background: 'var(--bg-dark)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
             >
-              <div
-                className="absolute top-4 right-4 font-display text-8xl font-light leading-none opacity-10"
-              >
-                {sdg.number}
-              </div>
-              <div className="relative z-10">
-                <p className="text-xs tracking-[0.2em] uppercase mb-2 opacity-70">SDG {sdg.number}</p>
-                <h3 className="font-display text-2xl font-medium mb-3">{sdg.title}</h3>
-                <p className="text-sm leading-relaxed opacity-80">{sdg.desc}</p>
-              </div>
+              <p className="font-display mb-1" style={{ fontSize: '2.5rem', fontWeight: 300, color: 'var(--accent)', fontStyle: 'italic' }}>
+                {item.stat}
+              </p>
+              <div className="w-6 h-px mb-5" style={{ background: 'var(--accent)' }} />
+              <p className="overline mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>{item.label}</p>
+              <p className="body-editorial" style={{ color: 'rgba(255,255,255,0.55)' }}>{item.desc}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Impact Stats */}
-        <motion.div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-        >
-          {impactStats.map((stat) => {
-            const Icon = stat.icon;
-            return (
+        {/* Initiatives stats row */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '4rem' }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+            {initiatives.map((item, i) => (
               <motion.div
-                key={stat.label}
-                className="p-6 rounded-xl text-center card-base"
-                variants={fadeInUp}
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
               >
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ background: 'var(--accent-pale)' }}
-                >
-                  <Icon size={20} style={{ color: 'var(--accent)' }} />
-                </div>
-                <p className="font-display text-4xl font-light mb-1" style={{ color: 'var(--accent)' }}>
-                  {stat.value}
+                <p className="font-display" style={{ fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 300, color: 'var(--accent)', lineHeight: 1 }}>
+                  {item.number}
                 </p>
-                <p className="font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
-                  {stat.label}
-                </p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                  {stat.desc}
-                </p>
+                <p className="overline mt-2 mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>{item.label}</p>
+                <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65 }}>{item.desc}</p>
               </motion.div>
-            );
-          })}
-        </motion.div>
+            ))}
+          </div>
+        </div>
 
-        {/* Initiatives Banner */}
+        {/* IDDG mention */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
+          className="mt-16 pt-10 flex flex-col md:flex-row md:items-center gap-6"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          {/* Women in Colour */}
-          <motion.div
-            className="relative p-10 rounded-2xl overflow-hidden"
-            style={{ background: 'var(--bg-dark)', color: '#fff' }}
-            variants={fadeInUp}
-          >
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{ background: 'linear-gradient(135deg, var(--accent), transparent)' }}
-            />
-            <div className="relative z-10">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(139,111,71,0.2)', border: '1px solid rgba(196,168,130,0.3)' }}>
-                <Users size={20} style={{ color: 'var(--accent-light)' }} />
-              </div>
-              <h3 className="font-display text-2xl mb-3">Women in Colour Initiative</h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                Our flagship social initiative actively recruits, trains, and supports women entering the painting profession. We believe diversity drives better outcomes, and we're committed to building an inclusive industry.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Training & IDDG */}
-          <motion.div
-            className="relative p-10 rounded-2xl overflow-hidden"
-            style={{ background: 'var(--accent-pale)', border: '1px solid var(--accent-light)' }}
-            variants={fadeInUp}
-          >
-            <h3 className="font-display text-2xl mb-3" style={{ color: 'var(--text-primary)' }}>
-              Training & Industry Collaboration
-            </h3>
-            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-secondary)' }}>
-              Through partnerships with IDDG and industry organisations, we host regular training seminars and workshops that upskill painters across Ghana, raising the quality bar for the entire industry.
-            </p>
-            <ul className="space-y-2">
-              {[
-                'Regular skills development seminars',
-                'Collaboration with IDDG & industry bodies',
-                'Youth internship programs',
-                'Professional certification pathways',
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
-                  <div className="w-4 h-px" style={{ background: 'var(--accent)' }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <div className="w-8 h-px flex-shrink-0" style={{ background: 'var(--accent)' }} />
+          <p className="body-editorial" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            In collaboration with <span style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>IDDG</span> — the Industry Development & Governance Group — we continue to advocate for formal standards, certification pathways, and best-practice adoption across Ghana's painting industry.
+          </p>
         </motion.div>
       </div>
     </section>

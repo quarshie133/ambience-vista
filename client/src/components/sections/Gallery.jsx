@@ -3,63 +3,80 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fadeInUp, staggerContainer, defaultViewport } from '../../lib/animations';
 
+import gallery1 from '../../assets/before_after image.jpeg';
+import gallery2 from '../../assets/painting.jpeg';
+import gallery3 from '../../assets/team.jpeg';
+import gallery4 from '../../assets/room.jpeg';
+import gallery5 from '../../assets/roller technique training.jpeg';
+import gallery6 from '../../assets/painting_image.jpeg';
+import gallery7 from '../../assets/building.jpeg';
+import gallery8 from '../../assets/workshop_seminar1.jpeg';
+
 // Curated gallery images — craftsmanship, process, detail, professional
 const galleryImages = [
   {
     id: 1,
-    src: 'https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?auto=format&fit=crop&w=800&q=80',
-    alt: 'Close-up of professional paint finish detail',
-    category: 'detail',
-    span: 'row-span-2',
+    src: gallery1,
+    alt: 'Before and after transformation of a premium exterior painting project',
+    category: 'process',
+    title: 'Exterior Restoration',
+    description: 'Full surface diagnosis, scraping, and application of premium weather-guard coating.',
   },
   {
     id: 2,
-    src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80',
-    alt: 'Professional painter applying coat',
+    src: gallery2,
+    alt: 'Professional painting application on interior wall surface',
     category: 'process',
-    span: '',
+    title: 'Precision Application',
+    description: 'Meticulous paint application ensuring even thickness, seamless coats, and clean borders.',
   },
   {
     id: 3,
-    src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
-    alt: 'Site supervisor reviewing quality',
+    src: gallery3,
+    alt: 'Ambience Vista team during professional on-site execution',
     category: 'team',
-    span: '',
+    title: 'On-Site Supervision',
+    description: 'Our trained crew executing structured painting protocols under rigorous QA supervision.',
   },
   {
     id: 4,
-    src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
-    alt: 'Fresh paint on residential wall',
+    src: gallery4,
+    alt: 'Beautiful residential bedroom interior with clean premium coat finish',
     category: 'residential',
-    span: 'col-span-2',
+    title: 'Sophisticated Interiors',
+    description: 'Flawless finishes in modern residences, using curated palettes and premium low-VOC paints.',
   },
   {
     id: 5,
-    src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=600&q=80',
-    alt: 'Surface preparation in progress',
+    src: gallery5,
+    alt: 'Precision roller technique training during professional development seminar',
     category: 'process',
-    span: 'row-span-2',
+    title: 'Capacity Building',
+    description: 'Continuous technical training for local painting artisans on advanced rollers and brushes.',
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=600&q=80',
-    alt: 'Paint brush detail craftsmanship',
+    src: gallery6,
+    alt: 'Close-up detail of smooth plastering and premium paint texture',
     category: 'detail',
-    span: '',
+    title: 'Textural Details',
+    description: 'Perfect corner cuts, seamless drywall transitions, and flawless gloss inspections.',
   },
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80',
-    alt: 'Commercial painting project',
+    src: gallery7,
+    alt: 'Large-scale commercial building painting project completed successfully',
     category: 'commercial',
-    span: 'col-span-2',
+    title: 'Commercial Facades',
+    description: 'Large-scale scaffolding, protective coatings, and exterior painting for commercial developments.',
   },
   {
     id: 8,
-    src: 'https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?auto=format&fit=crop&w=600&q=80',
-    alt: 'Paint finish quality inspection',
-    category: 'detail',
-    span: '',
+    src: gallery8,
+    alt: 'Hands-on interactive painting workshop and capacity building seminar',
+    category: 'team',
+    title: 'Professional Workshops',
+    description: 'Raising standard benchmarks in the industry through structured training seminars.',
   },
 ];
 
@@ -83,82 +100,92 @@ export default function Gallery() {
       <div className="container-site">
         {/* Header */}
         <motion.div
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
         >
           <div>
-            <motion.div className="section-label" variants={fadeInUp}>
-              <span className="text-label" style={{ color: 'var(--accent-light)' }}>Our Work</span>
-            </motion.div>
-            <motion.h2
-              className="text-display-lg font-display"
-              style={{ color: '#fff' }}
-              variants={fadeInUp}
-            >
+            <div className="overline-row mb-6">
+              <span className="overline" style={{ color: 'rgba(255,255,255,0.6)' }}>Our Work</span>
+            </div>
+            <h2 className="text-editorial-xl" style={{ color: '#fff' }}>
               Project Highlights
-            </motion.h2>
+            </h2>
           </div>
 
           {/* Filter Tabs */}
-          <motion.div className="flex flex-wrap gap-2" variants={fadeInUp}>
+          <motion.div className="flex flex-wrap gap-x-6 gap-y-3 pb-2" variants={fadeInUp}>
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className="px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-300"
+                className="text-[11px] tracking-[0.2em] uppercase font-semibold transition-colors duration-300 relative pb-2 cursor-pointer"
                 style={{
-                  background: activeCategory === cat ? 'var(--accent)' : 'rgba(255,255,255,0.08)',
-                  color: activeCategory === cat ? '#fff' : 'rgba(255,255,255,0.6)',
-                  border: activeCategory === cat ? 'none' : '1px solid rgba(255,255,255,0.12)',
+                  color: activeCategory === cat ? 'var(--accent)' : 'rgba(255,255,255,0.4)',
                 }}
               >
                 {cat}
+                {activeCategory === cat && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-[2px]"
+                    style={{ background: 'var(--accent)' }}
+                    layoutId="galleryFilterUnderline"
+                  />
+                )}
               </button>
             ))}
           </motion.div>
         </motion.div>
 
-        {/* Masonry Grid */}
+        {/* Structured Editorial Grid */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[200px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
           layout
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((img, index) => (
               <motion.div
                 key={img.id}
-                className={`relative overflow-hidden rounded-xl cursor-pointer group ${img.span || ''}`}
+                className="flex flex-col cursor-pointer group"
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.4 }}
                 onClick={() => openLightbox(index)}
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                {/* Hover overlay */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                  style={{ background: 'rgba(139,111,71,0.5)' }}
-                >
-                  <ZoomIn size={28} color="#fff" />
-                </div>
-                {/* Category badge */}
-                <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span
-                    className="text-xs px-2 py-1 rounded-full capitalize"
-                    style={{ background: 'rgba(28,28,26,0.75)', color: '#fff' }}
+                {/* Image Container with fixed aspect ratio */}
+                <div className="relative overflow-hidden rounded-xl aspect-[3/2] border border-white/5 mb-4">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Hover overlay */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    style={{ background: 'rgba(240,120,64,0.15)' }}
                   >
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#1E1E1C]/80 border border-white/10 shadow-lg scale-90 group-hover:scale-100 transition-transform duration-300">
+                      <ZoomIn size={18} color="#fff" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Structured Text Content */}
+                <div className="flex flex-col">
+                  <span className="text-[10px] tracking-[0.2em] uppercase font-semibold text-accent mb-2">
                     {img.category}
                   </span>
+                  <h3 className="font-display italic text-lg lg:text-xl text-white font-light leading-snug transition-colors duration-300 group-hover:text-accent">
+                    {img.title}
+                  </h3>
+                  <p className="text-xs text-white/50 leading-relaxed mt-2">
+                    {img.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

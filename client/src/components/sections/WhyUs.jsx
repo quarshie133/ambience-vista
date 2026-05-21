@@ -1,136 +1,101 @@
 import { motion } from 'framer-motion';
-import { fadeInUp, blurUp, staggerContainer, fastStagger, drawLine, defaultViewport } from '../../lib/animations';
+import { staggerContainer, defaultViewport } from '../../lib/animations';
 
 const reasons = [
-  {
-    number: '01',
-    title: 'Structured Process',
-    description: 'Every project follows a rigorous methodology from site assessment through final inspection — no shortcuts, no compromises.',
-  },
-  {
-    number: '02',
-    title: 'Expert Supervision',
-    description: 'Experienced supervisors oversee every phase, ensuring consistent quality from surface preparation to final coat.',
-  },
-  {
-    number: '03',
-    title: 'Proven Quality Control',
-    description: 'Multi-stage quality checks and premium, specification-appropriate products — suited to each surface and environment.',
-  },
-  {
-    number: '04',
-    title: 'Client Education',
-    description: 'We help clients understand what products to use, why, and how — building long-term trust through transparency.',
-  },
-  {
-    number: '05',
-    title: 'Transparent Pricing',
-    description: 'Clear, detailed quotations with zero hidden costs. You know exactly what you are getting before work begins.',
-  },
-  {
-    number: '06',
-    title: 'Continuous Training',
-    description: 'Our team stays current with best practices, new formulations, and advanced application techniques through regular training.',
-  },
+  { number: '01', title: 'Structured Process',   description: 'Every project follows a rigorous methodology from site assessment through final inspection. No shortcuts, no compromises at any stage.' },
+  { number: '02', title: 'Expert Supervision',   description: 'Experienced supervisors oversee every phase, ensuring consistent quality from surface preparation to the final coat.' },
+  { number: '03', title: 'Quality Control',      description: 'Multi-stage quality checks and premium, specification-appropriate products — suited to each surface and environment.' },
+  { number: '04', title: 'Client Education',     description: 'We help clients understand what to use, why, and how — building long-term relationships based on trust and transparency.' },
+  { number: '05', title: 'Transparent Pricing',  description: 'Clear, detailed quotations with zero hidden costs. You know exactly what you are getting before a single brush stroke.' },
+  { number: '06', title: 'Continuous Training',  description: 'Our team stays current with industry best practices, new formulations, and advanced application techniques through regular training.' },
 ];
 
 export default function WhyUs() {
   return (
-    <section
-      id="why-us"
-      className="section-padding"
-      style={{ background: 'var(--bg-dark)' }}
-    >
+    <section id="why-us" className="section-padding" style={{ background: 'var(--bg-surface)' }}>
       <div className="container-site">
+
         {/* Header */}
         <motion.div
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
         >
-          <div className="max-w-xl">
-            <motion.div className="section-label mb-4" variants={fadeInUp}>
-              <span className="text-label" style={{ color: 'var(--accent-light)' }}>
-                The Ambience Difference
-              </span>
-            </motion.div>
-            <motion.h2
-              className="text-display-lg font-display"
-              style={{ color: '#fff' }}
-              variants={fadeInUp}
-            >
-              Why Clients Choose Us
-            </motion.h2>
-          </div>
-          <motion.p
-            className="text-sm max-w-xs leading-relaxed lg:text-right"
-            style={{ color: 'rgba(255,255,255,0.45)' }}
-            variants={fadeInUp}
+          <motion.div
+            className="lg:col-span-5"
+            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
           >
-            Six reasons our clients return — and refer us to others.
-          </motion.p>
+            <div className="overline-row mb-6">
+              <span className="overline">The Ambience Difference</span>
+            </div>
+            <h2 className="text-editorial-xl" style={{ color: 'var(--text-primary)' }}>
+              Why Clients Choose Us
+            </h2>
+          </motion.div>
+          <motion.div
+            className="lg:col-span-5 lg:col-start-8 flex items-end"
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.7, delay: 0.2 } } }}
+          >
+            <p className="body-editorial">
+              Six reasons our clients keep coming back — and send others our way.
+            </p>
+          </motion.div>
         </motion.div>
 
-        {/* Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
-          style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}
-          variants={fastStagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-        >
+        {/* Reasons — numbered editorial list (Studio McGee style: clean rows with dividers) */}
+        <div>
           {reasons.map((r, i) => (
             <motion.div
               key={r.number}
-              className="group relative flex flex-col p-8 cursor-default"
-              style={{ background: 'var(--bg-dark)', minHeight: '220px' }}
-              variants={blurUp}
-              whileHover={{ background: 'rgba(240,120,64,0.06)', transition: { duration: 0.3 } }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 py-10 group cursor-default"
+              style={{ borderTop: '1px solid var(--border)' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: i * 0.06 }}
             >
-              {/* Top border sweep on hover */}
-              <motion.div
-                className="absolute top-0 left-0 h-0.5"
-                style={{ background: 'var(--accent)', width: 0 }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              />
-
-              {/* Large ghost number */}
-              <span
-                className="font-display text-7xl font-light leading-none mb-6 select-none block"
-                style={{ color: 'rgba(255,255,255,0.05)' }}
-              >
-                {r.number}
-              </span>
-
-              {/* Accent line */}
-              <motion.div
-                className="h-0.5 w-8 mb-4 flex-shrink-0 rounded-full"
-                style={{ background: 'var(--accent)', originX: 0 }}
-                variants={drawLine}
-              />
+              {/* Number */}
+              <div className="md:col-span-1">
+                <span
+                  className="font-display"
+                  style={{ fontSize: '0.875rem', color: 'var(--accent)', fontWeight: 400 }}
+                >
+                  {r.number}
+                </span>
+              </div>
 
               {/* Title */}
-              <h3
-                className="font-semibold text-base leading-snug mb-3"
-                style={{ color: '#fff' }}
-              >
-                {r.title}
-              </h3>
+              <div className="md:col-span-4">
+                <h3
+                  className="font-display"
+                  style={{ fontSize: 'clamp(1.2rem,2vw,1.65rem)', fontWeight: 400, color: 'var(--text-primary)', lineHeight: 1.2, transition: 'color 0.3s' }}
+                >
+                  {r.title}
+                </h3>
+              </div>
 
               {/* Description */}
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: 'rgba(255,255,255,0.5)', lineHeight: '1.7' }}
+              <div className="md:col-span-6 md:col-start-6">
+                <p className="body-editorial" style={{ maxWidth: '500px' }}>
+                  {r.description}
+                </p>
+              </div>
+
+              {/* Accent line on hover — grows in from left */}
+              <motion.div
+                className="hidden md:block md:col-span-1 flex items-center justify-end"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
               >
-                {r.description}
-              </p>
+                <div className="w-8 h-px ml-auto" style={{ background: 'var(--accent)' }} />
+              </motion.div>
             </motion.div>
           ))}
-        </motion.div>
+          {/* Bottom rule */}
+          <div className="rule" />
+        </div>
       </div>
     </section>
   );

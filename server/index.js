@@ -54,20 +54,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// ─── Static Files ─────────────────────────────────────────────────────────────
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// ─── Routes ───────────────────────────────────────────────────────────────────
-app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/services', serviceRoutes);
-app.use('/api/gallery', galleryRoutes);
-app.use('/api/partners', partnerRoutes);
-app.use('/api/upload', uploadRoutes);
-
 // ─── Content Route ────────────────────────────────────────────────────────────
 app.get('/api/content/:section', async (req, res) => {
   try {
@@ -218,6 +204,21 @@ async function startServer() {
 
       app.use(admin.options.rootPath, adminRouter);
       console.log(`✅ AdminJS ready at http://localhost:${process.env.PORT || 5000}${admin.options.rootPath}`);
+
+      // ─── Body Parsers (Registered AFTER AdminJS Router) ────────────────────────
+      app.use('/api', express.json({ limit: '10mb' }));
+      app.use('/api', express.urlencoded({ extended: true, limit: '10mb' }));
+
+      // ─── Static Files ─────────────────────────────────────────────────────────────
+      app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+      // ─── API Routes ───────────────────────────────────────────────────────────────
+      app.use('/api/auth', authRoutes);
+      app.use('/api/contact', contactRoutes);
+      app.use('/api/services', serviceRoutes);
+      app.use('/api/gallery', galleryRoutes);
+      app.use('/api/partners', partnerRoutes);
+      app.use('/api/upload', uploadRoutes);
     } catch (adminError) {
       console.error('AdminJS setup error (non-fatal):', adminError.message);
       console.error(adminError);
