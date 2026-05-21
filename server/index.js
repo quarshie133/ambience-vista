@@ -79,7 +79,7 @@ app.get('/api/health', (req, res) => {
 async function startServer() {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 30000,
     });
     console.log('✅ MongoDB connected');
 
