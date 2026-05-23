@@ -7,6 +7,6 @@ const partnerSchema = new mongoose.Schema({
   description: { type: String },
   order: { type: Number, default: 0 },
   isActive: { type: Boolean, default: true },
-}, { timestamps: true });
+}, { timestamps: true })
 
-export default mongoose.model('Partner', partnerSchema);
+export default mongoose.model('Partner', partnerSchema)
