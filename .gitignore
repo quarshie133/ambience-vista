@@ -63,3 +63,9 @@ Thumbs.db
 # AdminJS auto-generated bundle (do NOT commit)
 # ===========================
 server/.adminjs/
+
+# ===========================
+# Sub-repositories
+# ===========================
+client/
+
